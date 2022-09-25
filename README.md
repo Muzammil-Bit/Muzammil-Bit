@@ -1,7 +1,7 @@
 - 👋 Hi, I’m @Muzammil-Hussain
 - 👀 I’m interested in Php Laravel and Flutter.
-- 🌱 I’m learning Flutter but I am very confident in Laravel
-- 💞️ I’m looking to collaborate on Laravel Projects
+- 🌱 I have been workin on Flutter and Laravel for more than 2 years now.
+- 💞️ I’m looking to collaborate on Flutter or Laravel Projects
 - 📫 Contact me at : 
 
         muzammil0301@gmail.com
