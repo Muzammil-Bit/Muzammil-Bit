@@ -1,5 +1,5 @@
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-informational?style=for-the-badge&logo=linkedin&logoColor=white&color=light)]([[https://www.linkedin.com/in/ye-lwin-oo-ucsm/](https://www.linkedin.com/in/muzammil-developer/)](https://www.linkedin.com/in/muzammil-developer/)) &nbsp;
-[![LinkedIn](https://img.shields.io/badge/Instagram-Account-informational?style=for-the-badge&logo=instagram&logoColor=white&color=light)]([[https://www.facebook.com/ye.lwin.oo.someone](https://www.instagram.com/mr.muzammil_h/)](https://www.instagram.com/mr.muzammil_h/)) &nbsp;
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-informational?style=for-the-badge&logo=linkedin&logoColor=white&color=light)]([[https://www.linkedin.com/in/muzammil-developer/](https://www.linkedin.com/in/muzammil-developer/)](https://www.linkedin.com/in/muzammil-developer/)) &nbsp;
+[![LinkedIn](https://img.shields.io/badge/Instagram-Account-informational?style=for-the-badge&logo=instagram&logoColor=white&color=light)]([[https://www.instagram.com/mr.muzammil_h/](https://www.instagram.com/mr.muzammil_h/)](https://www.instagram.com/mr.muzammil_h/)) &nbsp;
 [![GitHub followers](https://img.shields.io/github/followers/Muzammil-Bit?logo=GitHub&style=for-the-badge&color=7fff00)](https://github.com/Muzammil-bit) &nbsp;
 [![GitHub Stars](https://img.shields.io/github/stars/Muzammil-bit?logo=github&style=for-the-badge&color=7fff00)](https://github.com/Muzammil-bit) &nbsp;<br>
 
@@ -27,7 +27,7 @@
 
 <br>
 
-[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Muzammil-Bit&repo=dot_curved_bottom_nav&theme=dark&title_color=7fff00&text_color=7fff00)](https://github.com/YeLwinOo-Steve/Pulse)&nbsp;
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Muzammil-Bit&repo=dot_curved_bottom_nav&theme=dark&title_color=7fff00&text_color=7fff00)](https://github.com/Muzammil-bit/dot_curved_bottom_nav)&nbsp;
 
 &nbsp;
 
