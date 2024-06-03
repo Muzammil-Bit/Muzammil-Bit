@@ -1,11 +1,11 @@
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-informational?style=for-the-badge&logo=linkedin&logoColor=white&color=light)]([https://www.linkedin.com/in/ye-lwin-oo-ucsm/](https://www.linkedin.com/in/muzammil-developer/)) &nbsp;
-[![LinkedIn](https://img.shields.io/badge/Instagram-Account-informational?style=for-the-badge&logo=instagram&logoColor=white&color=light)]([https://www.facebook.com/ye.lwin.oo.someone](https://www.instagram.com/mr.muzammil_h/)) &nbsp;
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-informational?style=for-the-badge&logo=linkedin&logoColor=white&color=light)]([[https://www.linkedin.com/in/ye-lwin-oo-ucsm/](https://www.linkedin.com/in/muzammil-developer/)](https://www.linkedin.com/in/muzammil-developer/)) &nbsp;
+[![LinkedIn](https://img.shields.io/badge/Instagram-Account-informational?style=for-the-badge&logo=instagram&logoColor=white&color=light)]([[https://www.facebook.com/ye.lwin.oo.someone](https://www.instagram.com/mr.muzammil_h/)](https://www.instagram.com/mr.muzammil_h/)) &nbsp;
 [![GitHub followers](https://img.shields.io/github/followers/Muzammil-Bit?logo=GitHub&style=for-the-badge&color=7fff00)](https://github.com/YeLwinOo-Steve) &nbsp;
-[![GitHub Stars](https://img.shields.io/github/stars/Muzammil-bit?logo=github&style=for-the-badge&color=7fff00)](https://github.com/YeLwinOo-Steve) &nbsp;<br>
+[![GitHub Stars](https://img.shields.io/github/stars/Muzammil-bit?logo=github&style=for-the-badge&color=7fff00)](https://github.com/Muzammil-bit) &nbsp;<br>
 
 ![](https://komarev.com/ghpvc/?username=Muzammil-Bit&color=7fff00)
 
-# 🖐🏽 &nbsp;<b>Hi There! I'm Muzammil Hussain</b>
+# 👋🏻 &nbsp;<b>Hi There! I'm Muzammil Hussain</b>
 
 <h3>I'm <b style="color: #7fff00">a passionate Software Developer proficient in crafting full-fledged cross-platform software with over 4+ years of coding experience</b>.</h3> 
 <ul>
