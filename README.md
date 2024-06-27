@@ -27,16 +27,16 @@
 
 <br>
 
-[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Muzammil-Bit&repo=dot_curved_bottom_nav&theme=dark&title_color=7fff00&text_color=7fff00)](https://github.com/Muzammil-bit/dot_curved_bottom_nav)&nbsp;
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Muzammil-Bit&repo=dot_curved_bottom_nav&bg_color=3F3F3F&title_color=F1DFB0&text_color=DCDCCD)](https://github.com/Muzammil-bit/dot_curved_bottom_nav)&nbsp;
 
-&nbsp;
+
 
 ## 📊 &nbsp;Stats
 
 <br>
 
-![Github Contributions](http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Muzammil-Bit&theme=chartreuse_dark)
+![Github Contributions](http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Muzammil-Bit&theme=zenburn)
 
-![Github Stats](http://github-profile-summary-cards.vercel.app/api/cards/stats?username=Muzammil-Bit&theme=chartreuse_dark)&nbsp;&nbsp;
+![Github Stats](http://github-profile-summary-cards.vercel.app/api/cards/stats?username=Muzammil-Bit&theme=zenburn)&nbsp;&nbsp;
 &nbsp;
-![Commit Time](http://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Muzammil-Bit&theme=chartreuse_dark&utcOffset=8)
+![Commit Time](http://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Muzammil-Bit&theme=zenburn&utcOffset=8)
