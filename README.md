@@ -25,11 +25,10 @@
 
 ## 📃 &nbsp;My Showcase Projects
 
-<br>
-
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Muzammil-Bit&repo=muzammil_hussain&bg_color=3F3F3F&title_color=F1DFB0&text_color=DCDCCD)](https://github.com/Muzammil-bit/muzammil_hussain)&nbsp;
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Muzammil-Bit&repo=dot_curved_bottom_nav&bg_color=3F3F3F&title_color=F1DFB0&text_color=DCDCCD)](https://github.com/Muzammil-bit/dot_curved_bottom_nav)&nbsp;
 
-
+<br>
 
 ## 📊 &nbsp;Stats
 
