@@ -26,8 +26,22 @@
 
 ## 📃 &nbsp;My Showcase Projects
 
-[![muzammil_hussain](https://socialify.git.ci/Muzammil-bit/muzammil_hussain/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit+Board&stargazers=1&theme=Dark)](https://github.com/Muzammil-bit/muzammil_hussain)&nbsp;
-[![dot_curved_bottom_nav](https://socialify.git.ci/Muzammil-bit/dot_curved_bottom_nav/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit+Board&stargazers=1&theme=Dark)](https://github.com/Muzammil-bit/dot_curved_bottom_nav)&nbsp;
+<table>
+  <tr>
+    <td width="50%">
+      <a href="https://github.com/Muzammil-bit/muzammil_hussain"><img src="https://socialify.git.ci/Muzammil-bit/muzammil_hussain/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit+Board&stargazers=1&theme=Dark" alt="muzammil_hussain" width="100%"></a>
+    </td>
+    <td width="50%">
+      <a href="https://github.com/Muzammil-bit/dot_curved_bottom_nav"><img src="https://socialify.git.ci/Muzammil-bit/dot_curved_bottom_nav/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit+Board&stargazers=1&theme=Dark" alt="dot_curved_bottom_nav" width="100%"></a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <a href="https://github.com/Muzammil-bit/pocket_chess"><img src="https://socialify.git.ci/Muzammil-bit/pocket_chess/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit+Board&stargazers=1&theme=Dark" alt="pocket_chess" width="100%"></a>
+    </td>
+    <td width="50%"></td>
+  </tr>
+</table>
 
 <br>
 
