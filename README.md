@@ -1,56 +1,54 @@
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-informational?style=for-the-badge&logo=linkedin&logoColor=white&color=light)](https://www.linkedin.com/in/muzammil-developer/) &nbsp;
-[![Instagram](https://img.shields.io/badge/Instagram-Account-informational?style=for-the-badge&logo=instagram&logoColor=white&color=light)](https://www.instagram.com/muzammilxhussain/) &nbsp;
-[![GitHub followers](https://img.shields.io/github/followers/Muzammil-Bit?logo=GitHub&style=for-the-badge&color=7fff00)](https://github.com/Muzammil-bit) &nbsp;
-[![GitHub Stars](https://img.shields.io/github/stars/Muzammil-bit?logo=github&style=for-the-badge&color=7fff00)](https://github.com/Muzammil-bit) &nbsp;<br>
+[![Portfolio](https://img.shields.io/badge/Portfolio-heymuzammil.com-54c5f8?style=for-the-badge&logo=googlechrome&logoColor=black&labelColor=1a1a1a)](https://heymuzammil.com) &nbsp;
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-54c5f8?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=1a1a1a)](https://www.linkedin.com/in/muzammil-developer/) &nbsp;
+[![Followers](https://img.shields.io/github/followers/Muzammil-Bit?style=for-the-badge&logo=github&label=Followers&labelColor=1a1a1a&color=54c5f8)](https://github.com/Muzammil-Bit) &nbsp;
+[![Stars](https://img.shields.io/github/stars/Muzammil-Bit?style=for-the-badge&logo=github&label=Stars&labelColor=1a1a1a&color=54c5f8)](https://github.com/Muzammil-Bit)
 
-![](https://komarev.com/ghpvc/?username=Muzammil-Bit&color=7fff00)
+![](https://komarev.com/ghpvc/?username=Muzammil-Bit&style=flat&color=54c5f8)
 
-# 👋🏻 &nbsp;<b>Hi There! I'm Muzammil Hussain</b>
+## <img src="assets/icons/waving-hand.png" width="32px"> &nbsp;Hi there! I'm Muzammil Hussain
 
-<h3>I'm <b style="color: #7fff00">a passionate Software Developer proficient in crafting full-fledged cross-platform software with over 4+ years of coding experience</b>.</h3> 
+<a href="https://heymuzammil.com"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=20&pause=1200&color=54C5F8&vCenter=true&width=480&lines=Flutter+apps%2C+start+to+finish;Animated+UI+that+feels+alive;AI+features+that+ship;Fixing+things+in+Flutter+%26+T3+Code" alt="Flutter apps, start to finish"></a>
+
+<h4>Mobile developer from Lahore building Flutter apps end to end: the animated UI people touch, and the .NET, Node or Laravel backend and AI features behind it.</h4>
+
 <ul>
-<li> <b style="font-size: 28px">🔭</b>  I'm currently <b style="font-size: 18px;color: #7fff00;">working with Flutter to build awesome looking apps.</b></li>
-<li> <b style="font-size: 28px">📢</b>  I write about Flutter at:<br>
-  <ul>
-  <li><a href="https://www.linkedin.com/in/muzammil-developer/">LinkedIn</a></li>
-  <li><a href="https://www.instagram.com/muzammilxhussain/">Instagram</a></li>
-  </ul>
-</li>
-<li> <b style="font-size: 28px">🕸</b>  Fairly obsessed with Mobile App Technologies.</li> 
-<li> <b style="font-size: 28px">📖</b>  I am also a Web Engineer & Laravel Developer </li>
-<li> <b style="font-size: 28px">💭</b>  I love solving programming challenges, coding, and building various software projects with Dart & Flutter. </li>
-<li> <b style="font-size: 28px">📮</b>  I often work on <b style="text-decoration: underline;color: #7fff00">freelance projects</b>. Contact me via <a href="mailto:muzammil0301@gmail.com">muzammil0301@gmail.com</a> .</li>
+<li><img src="assets/icons/technologist.png" width="24px">&nbsp; Building cross-platform apps with Flutter, plus web with Next.js and Astro.</li>
+<li><img src="assets/icons/high-voltage.png" width="24px">&nbsp; Fairly obsessed with motion. If a screen can animate, I've probably tried.</li>
+<li><img src="assets/icons/robot.png" width="24px">&nbsp; Lately shipping AI-assisted flows in production apps, and using AI agents to build faster.</li>
+<li><img src="assets/icons/party-popper.png" width="24px">&nbsp; Contributing to <a href="https://github.com/flutter/flutter/pulls?q=author%3AMuzammil-Bit">Flutter</a> and <a href="https://github.com/pingdotgg/t3code/pulls?q=author%3AMuzammil-Bit">T3 Code</a>.</li>
+<li><img src="assets/icons/lady-beetle.png" width="24px">&nbsp; On a mission to fix bugs I proudly introduced.</li>
+<li><img src="assets/icons/writing-hand.png" width="24px">&nbsp; Open to freelance work. Reach me at <a href="mailto:muzammil0301@gmail.com">muzammil0301@gmail.com</a>.</li>
 </ul>
 
-&nbsp;
-
-## 📃 &nbsp;My Showcase Projects
+## <img src="assets/icons/glowing-star.png" width="24px">&nbsp; Showcase projects
 
 <table>
   <tr>
     <td width="50%">
-      <a href="https://github.com/Muzammil-bit/muzammil_hussain"><img src="https://socialify.git.ci/Muzammil-bit/muzammil_hussain/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit+Board&stargazers=1&theme=Dark" alt="muzammil_hussain" width="100%"></a>
+      <a href="https://github.com/Muzammil-Bit/muzammil_hussain"><img src="https://socialify.git.ci/Muzammil-Bit/muzammil_hussain/image?description=1&font=Inter&language=1&name=1&owner=1&pattern=Circuit+Board&stargazers=1&theme=Dark" alt="muzammil_hussain" width="100%"></a>
     </td>
     <td width="50%">
-      <a href="https://github.com/Muzammil-bit/dot_curved_bottom_nav"><img src="https://socialify.git.ci/Muzammil-bit/dot_curved_bottom_nav/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit+Board&stargazers=1&theme=Dark" alt="dot_curved_bottom_nav" width="100%"></a>
+      <a href="https://github.com/Muzammil-Bit/dot_curved_bottom_nav"><img src="https://socialify.git.ci/Muzammil-Bit/dot_curved_bottom_nav/image?description=1&font=Inter&language=1&name=1&owner=1&pattern=Circuit+Board&stargazers=1&theme=Dark" alt="dot_curved_bottom_nav" width="100%"></a>
     </td>
   </tr>
   <tr>
-    <td width="50%">
-      <a href="https://github.com/Muzammil-bit/pocket_chess"><img src="https://socialify.git.ci/Muzammil-bit/pocket_chess/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit+Board&stargazers=1&theme=Dark" alt="pocket_chess" width="100%"></a>
+    <td colspan="2" align="center">
+      <a href="https://github.com/Muzammil-Bit/pocket_chess"><img src="https://socialify.git.ci/Muzammil-Bit/pocket_chess/image?description=1&font=Inter&language=1&name=1&owner=1&pattern=Circuit+Board&stargazers=1&theme=Dark" alt="pocket_chess" width="50%"></a>
     </td>
-    <td width="50%"></td>
   </tr>
 </table>
 
-<br>
+## <img src="assets/icons/heart-with-arrow.png" width="24px">&nbsp; Like my work?
 
-## 📊 &nbsp;Stats
+<img src="assets/icons/fire.png" width="22px">&nbsp; [Check out my portfolio](https://heymuzammil.com)<br/>
+<img src="assets/icons/eyes.png" width="22px">&nbsp; [Follow along on LinkedIn](https://www.linkedin.com/in/muzammil-developer/)<br/>
+<img src="assets/icons/rocket.png" width="22px">&nbsp; [Hire me for your next app](mailto:muzammil0301@gmail.com)
 
-<br>
+## <img src="assets/icons/hourglass-done.png" width="24px">&nbsp; GitHub stats
 
-![Github Contributions](http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Muzammil-Bit&theme=zenburn)
+![GitHub Contributions](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Muzammil-Bit&theme=tokyonight)
 
-![Github Stats](http://github-profile-summary-cards.vercel.app/api/cards/stats?username=Muzammil-Bit&theme=zenburn)&nbsp;&nbsp;
-&nbsp;
-![Commit Time](http://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Muzammil-Bit&theme=zenburn&utcOffset=8)
+![GitHub Stats](https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Muzammil-Bit&theme=tokyonight)&nbsp;&nbsp;
+![Commit Time](https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Muzammil-Bit&theme=tokyonight&utcOffset=5)
+
+<sub>Animated icons from <a href="https://github.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis">Animated Fluent Emojis</a> (Microsoft Fluent Emoji, MIT).</sub>
