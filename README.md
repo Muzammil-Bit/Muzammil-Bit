@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/snake-dark.svg"><img alt="My last year of GitHub contributions, eaten by a growing snake" src="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/snake-light.svg"></picture>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/snake-dark.svg"><img alt="My last year of GitHub contributions, eaten by a growing snake" src="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/snake-light.svg" width="100%"></picture>
 </p>
 
 <p align="center">

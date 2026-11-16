@@ -16,9 +16,9 @@ const NOW = Date.now();
 
 const THEMES = {
   dark: { bg: "#0d1117", card: "#161b22", border: "#30363d", fg: "#e6edf3", muted: "#8b949e", empty: "#161b22",
-    levels: ["#0e4429", "#006d32", "#26a641", "#39d353"], accent: "#54c5f8", deep: "#0175c2", eye: "#0d1117" },
+    levels: ["#0e4429", "#006d32", "#26a641", "#39d353"], accent: "#54c5f8", deep: "#0175c2", eye: "#0d1117", tongue: "#ff7b72" },
   light: { bg: "#ffffff", card: "#f6f8fa", border: "#d0d7de", fg: "#1f2328", muted: "#656d76", empty: "#ebedf0",
-    levels: ["#9be9a8", "#40c463", "#30a14e", "#216e39"], accent: "#0175c2", deep: "#54c5f8", eye: "#ffffff" },
+    levels: ["#9be9a8", "#40c463", "#30a14e", "#216e39"], accent: "#0175c2", deep: "#54c5f8", eye: "#1f2328", tongue: "#cf222e" },
 };
 const SANS = `-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif`;
 
@@ -70,7 +70,7 @@ function weeksFromCal(cal) {
 }
 
 function snake(weeks, total, th) {
-  const t = THEMES[th], P = 14, S = 11, L = 34, T = 24, TICK = 0.12, PAUSE = 7;
+  const t = THEMES[th], P = 14, S = 11, L = 34, T = 24, TICK = 0.18, PAUSE = 7;
   const x = (c) => L + c * P, y = (r) => T + r * P;
   const all = weeks.flat();
   const max = Math.max(...all.map((d) => d.count));
@@ -94,7 +94,7 @@ function snake(weeks, total, th) {
     const [a, b] = [path[j], path[Math.min(j + 1, path.length - 1)]];
     return b[0] > a[0] ? 0 : b[1] > a[1] ? 90 : b[1] < a[1] ? -90 : 0;
   };
-  const css = [`@keyframes mv{${path.map(([c, r], j) => `${pc(j * TICK)}{transform:translate(${x(c) + S / 2}px,${y(r) + S / 2}px) rotate(${heading(j)}deg)}`).join("")}}`];
+  const css = [`.tg{transform-box:view-box;animation:tf 1.6s steps(1) infinite}@keyframes tf{0%,60%{opacity:0}61%,100%{opacity:1}}`, `@keyframes mv{${path.map(([c, r], j) => `${pc(j * TICK)}{transform:translate(${x(c) + S / 2}px,${y(r) + S / 2}px) rotate(${heading(j)}deg)}`).join("")}}`];
   const out = [];
   const text = (tx, ty, s, a = "start") => `<text x="${tx}" y="${ty}" fill="${t.muted}" font-size="10" text-anchor="${a}">${s}</text>`;
 
@@ -127,18 +127,26 @@ function snake(weeks, total, th) {
   [t.empty, ...t.levels].forEach((f, i) => out.push(`<rect x="${lx + i * P}" y="${fy - 9}" width="${S}" height="${S}" rx="2.5" fill="${f}"/>`));
   out.push(text(lx + 5 * P + 2, fy, "More"));
 
-  for (let i = finalLen - 1; i >= 1; i--) {
-    const anim = [`mv ${dur}s linear ${(i * TICK).toFixed(3)}s infinite backwards`];
+  // Two beads per segment, half a cell apart, so the body reads as one smooth tube.
+  for (let b = 2 * (finalLen - 1); b >= 1; b--) {
+    const i = Math.ceil(b / 2);
+    const anim = [`mv ${dur}s linear ${((b * TICK) / 2).toFixed(3)}s infinite backwards`];
     if (i >= start) {
       const g = eats[(i - start + 1) * per - 1].j * TICK;
-      css.push(`@keyframes g${i}{0%,${pc(g)}{opacity:0}${pc(g + 0.01)},100%{opacity:1}}`);
+      if (b % 2) css.push(`@keyframes g${i}{0%,${pc(g)}{opacity:0}${pc(g + 0.01)},100%{opacity:1}}`);
       anim.push(`g${i} ${dur}s linear infinite`);
     }
-    const r = 5.4 - (i / finalLen) * 1.8;
-    const fade = 1 - (i / finalLen) ** 1.4 * 0.9; // the tail fades out
-    out.push(`<g style="animation:${anim.join(",")}${i >= start ? ";opacity:0" : ""}"><circle r="${r.toFixed(2)}" fill="${lerp(t.accent, t.deep, i / finalLen)}" opacity="${fade.toFixed(2)}"/></g>`);
+    // Beads overlap into one tapering body; the tail fades into the page by colour, not opacity, so overlaps stay clean.
+    const f = b / (2 * finalLen);
+    const r = 7.4 - f * 4.2;
+    const fill = lerp(lerp(t.accent, t.deep, Math.min(1, f * 1.4)), t.bg, f ** 1.6 * 0.85);
+    out.push(`<g style="animation:${anim.join(",")}${i >= start ? ";opacity:0" : ""}"><circle r="${r.toFixed(2)}" fill="${fill}"/></g>`);
   }
-  out.push(`<g style="animation:mv ${dur}s linear infinite backwards"><path d="M-7 -6 H2 Q8 -6 8 0 Q8 6 2 6 H-7 Z" fill="${t.accent}"/><circle cx="3" cy="-2.8" r="1.7" fill="${t.eye}"/><circle cx="3" cy="2.8" r="1.7" fill="${t.eye}"/></g>`);
+  out.push(`<g style="animation:mv ${dur}s linear infinite backwards">` +
+    `<path class="tg" d="M7 0 H13 M13 0 L15.5 -2 M13 0 L15.5 2" stroke="${t.tongue}" stroke-width="1.3" stroke-linecap="round" fill="none"/>` +
+    `<ellipse rx="9" ry="8" cx="1" fill="${t.accent}"/>` +
+    `<circle cx="4" cy="-3.8" r="2.6" fill="#ffffff"/><circle cx="4" cy="3.8" r="2.6" fill="#ffffff"/>` +
+    `<circle cx="5" cy="-3.8" r="1.3" fill="${t.eye}"/><circle cx="5" cy="3.8" r="1.3" fill="${t.eye}"/></g>`);
 
   const mx = L + (weeks.length * P) / 2, my = T + 3.5 * P;
   css.push(`@keyframes res{0%,${pc(run + 0.2)}{opacity:0}${pc(run + 0.6)},${pc(dur - 0.8)}{opacity:1}${pc(dur - 0.4)},100%{opacity:0}}`);
