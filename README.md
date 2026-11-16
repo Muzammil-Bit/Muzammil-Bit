@@ -35,7 +35,3 @@
   <a href="https://www.linkedin.com/in/muzammil-developer/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/button-linkedin-dark.svg"><img alt="LinkedIn" src="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/button-linkedin-light.svg"></picture></a>
   <a href="mailto:muzammil0301@gmail.com"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/button-email-dark.svg"><img alt="Email" src="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/button-email-light.svg"></picture></a>
 </p>
-
-<p align="center">
-  <sub>Open to freelance work. The images above are redrawn every day from my GitHub activity by <a href="profile/generate.mjs">profile/generate.mjs</a>.</sub>
-</p>
