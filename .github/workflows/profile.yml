@@ -1,0 +1,37 @@
+# Redraws the README images from live GitHub data every day and on every push
+# to main, and publishes them to the output branch that README.md loads from.
+name: Profile
+
+on:
+  schedule:
+    - cron: "40 0 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile
+  cancel-in-progress: true
+
+jobs:
+  draw:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Draw the images
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node profile/generate.mjs dist
+      - name: Publish to the output branch
+        run: |
+          cd dist
+          git init -q -b output
+          git add .
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -q -m "Update profile images"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" output
