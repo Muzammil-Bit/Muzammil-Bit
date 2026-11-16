@@ -1,6 +1,5 @@
 // Draws every image in README.md from live GitHub data, in dark and light:
 //   title-*     the name in contribution-graph cells
-//   intro-*     the one-line intro
 //   snake-*     the last year of contributions, eaten by a growing snake
 //   stats-*     contributions, longest streak, stars, pub.dev packages
 //   project-*   one card per project, with its commit history as a cell strip
@@ -22,7 +21,6 @@ const THEMES = {
     levels: ["#9be9a8", "#40c463", "#30a14e", "#216e39"], accent: "#0175c2", deep: "#54c5f8", eye: "#ffffff" },
 };
 const SANS = `-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif`;
-const MONO = `ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
 
 const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 const lerp = (a, b, f) => "#" + hex(a).map((v, i) => Math.round(v + (hex(b)[i] - v) * f).toString(16).padStart(2, "0")).join("");
@@ -65,19 +63,6 @@ function banner(th) {
   }
   const css = `@keyframes sh{0%,75%,100%{opacity:1;transform:none}85%{opacity:.4;transform:scale(.75)}}rect{transform-box:fill-box;transform-origin:center}`;
   return svg(cols * pitch - 2, rows * pitch - 2, cells.join(""), css, ` role="img" aria-label="${NAME}"`);
-}
-
-function intro(th) {
-  const t = THEMES[th], w = 840, h = 64;
-  const parts = [
-    ["Mobile developer", t.fg], [" from Lahore building ", t.muted], ["Flutter apps", t.accent],
-    [" end to end: the animated UI and the backend behind it.", t.muted],
-  ];
-  const text = parts.map(([s, c]) => `<tspan fill="${c}"${c === t.fg || c === t.accent ? ' font-weight="600"' : ""}>${s}</tspan>`).join("");
-  const css = `.c{animation:blink 1.1s steps(1) infinite}@keyframes blink{50%{opacity:0}}`;
-  return svg(w, h,
-    `<text x="${w / 2}" y="26" font-size="17" text-anchor="middle">${text}</text>` +
-    `<text x="${w / 2}" y="52" font-size="13" text-anchor="middle" fill="${t.muted}" font-family="${MONO}">flutter · .net · node · ai features · open to freelance<tspan class="c" fill="${t.accent}"> ▍</tspan></text>`, css);
 }
 
 function weeksFromCal(cal) {
@@ -267,7 +252,6 @@ mkdirSync(OUT, { recursive: true });
 const weeks = weeksFromCal(cal);
 for (const th of Object.keys(THEMES)) {
   writeFileSync(`${OUT}/title-${th}.svg`, banner(th));
-  writeFileSync(`${OUT}/intro-${th}.svg`, intro(th));
   const s = snake(weeks, cal.totalContributions, th);
   writeFileSync(`${OUT}/snake-${th}.svg`, s.svg);
   writeFileSync(`${OUT}/stats-${th}.svg`, statsStrip([

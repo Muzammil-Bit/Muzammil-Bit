@@ -3,10 +3,6 @@
 </p>
 
 <p align="center">
-  <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/intro-dark.svg"><img alt="Mobile developer from Lahore building Flutter apps end to end: the animated UI and the backend behind it." src="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/intro-light.svg"></picture>
-</p>
-
-<p align="center">
   <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/snake-dark.svg"><img alt="My last year of GitHub contributions, eaten by a growing snake" src="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/snake-light.svg"></picture>
 </p>
 
