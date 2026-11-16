@@ -1,8 +1,10 @@
 // Draws every image in README.md from live GitHub data, in dark and light:
 //   title-*     the name in contribution-graph cells
-//   snake-*     the last year of contributions, eaten by a growing snake
-//   stats-*     contributions, longest streak, stars
-//   project-*   one card per project, with its commit history as a cell strip
+//   activity-*  the last year of contributions, eaten by a growing snake, with
+//               contributions, longest streak and stars underneath
+//   section-*   the section labels
+//   project-*   one card per project
+//   contrib-*   one card per open-source repo, one dot per pull request
 //   button-*    the link buttons
 //
 //   GITHUB_TOKEN=... node profile/generate.mjs [OUT_DIR]
@@ -11,7 +13,6 @@ import { writeFileSync, mkdirSync } from "node:fs";
 const LOGIN = "Muzammil-Bit";
 const NAME = "Muzammil Hussain";
 const OUT = process.argv[2] ?? "dist";
-const NOW = Date.now();
 
 const THEMES = {
   dark: { bg: "#0d1117", card: "#161b22", border: "#30363d", fg: "#e6edf3", muted: "#8b949e", empty: "#161b22",
@@ -56,7 +57,7 @@ function banner(th) {
   for (let c = 0; c < cols; c++) for (let r = 0; r < rows; r++) {
     const on = lit.has(`${c},${r}`), roll = rnd(), f = c / (cols - 1);
     const fill = on ? (f < 0.45 ? lerp(t.levels[2], t.levels[3], f / 0.45) : lerp(t.levels[3], t.accent, (f - 0.45) / 0.55))
-      : roll < 0.06 ? t.levels[0] : t.empty;
+      : roll < 0.035 ? t.levels[0] : t.empty;
     const anim = on ? ` style="animation:sh 5s ease-in-out ${(c * 0.04).toFixed(2)}s infinite"` : "";
     cells.push(`<rect x="${c * pitch}" y="${r * pitch}" width="${size}" height="${size}" rx="2" fill="${fill}"${anim}/>`);
   }
@@ -69,7 +70,7 @@ function weeksFromCal(cal) {
 }
 
 function snake(weeks, total, th) {
-  const t = THEMES[th], P = 14, S = 11, L = 34, T = 24, TICK = 0.18, PAUSE = 7;
+  const t = THEMES[th], P = 14, S = 11, L = 34, T = 24, TICK = 0.26, PAUSE = 7;
   const x = (c) => L + c * P, y = (r) => T + r * P;
   const all = weeks.flat();
   const max = Math.max(...all.map((d) => d.count));
@@ -120,7 +121,6 @@ function snake(weeks, total, th) {
   });
 
   const fy = T + 7 * P + 18;
-  out.push(text(L, fy, `${fmt(total)} contributions in the last year`));
   const lx = L + weeks.length * P - 5 * P - 30;
   out.push(text(lx - 5, fy, "Less", "end"));
   [t.empty, ...t.levels].forEach((f, i) => out.push(`<rect x="${lx + i * P}" y="${fy - 9}" width="${S}" height="${S}" rx="2.5" fill="${f}"/>`));
@@ -154,20 +154,38 @@ function snake(weeks, total, th) {
     `<text x="${mx}" y="${my + 14}" fill="${t.muted}" font-size="12" text-anchor="middle">${activeDays} active days · ${best}-day streak · snake length ${finalLen}</text>` +
     `<text x="${mx}" y="${my + 36}" fill="${t.accent}" font-size="12" font-weight="600" text-anchor="middle">Round two starting…</text></g>`);
 
-  return { svg: svg(L + weeks.length * P + 12, T + 7 * P + 30, out.join(""), css.join("")), activeDays, best };
+  return { body: out.join(""), css: css.join(""), w: L + weeks.length * P + 12, h: T + 7 * P + 30, activeDays, best };
 }
 
-function statsStrip(items, th) {
-  const t = THEMES[th], w = 840, h = 86, cw = w / items.length;
-  const body = items.map(([value, label], i) => {
-    const cx = cw * i + cw / 2;
-    return `<g style="animation:up .6s ease-out ${(i * 0.15).toFixed(2)}s both">` +
-      `<text x="${cx}" y="38" font-size="28" font-weight="700" fill="${i === 0 ? t.accent : t.fg}" text-anchor="middle">${value}</text>` +
-      `<text x="${cx}" y="62" font-size="12" fill="${t.muted}" text-anchor="middle">${label}</text></g>` +
-      (i ? `<line x1="${cw * i}" y1="18" x2="${cw * i}" y2="66" stroke="${t.border}"/>` : "");
+const W = 880;
+const card = (t, w, h, x = 0, y = 0) => `<rect x="${x + 0.5}" y="${y + 0.5}" width="${w - 1}" height="${h - 1}" rx="12" fill="${t.bg}" stroke="${t.border}"/>`;
+const textW = (s, size) => s.length * size * 0.56;
+
+// The contribution graph, the snake and the year's numbers in one panel.
+function activityPanel(weeks, total, stars, th) {
+  const t = THEMES[th], s = snake(weeks, total, th);
+  const gx = Math.round((W - s.w) / 2), gy = 46, h = 300;
+  const stats = [[fmt(total), "contributions in the last year"], [`${s.best} days`, "longest streak"], [fmt(stars), "stars across my repos"]];
+  const cw = (W - 48) / stats.length;
+  const statBody = stats.map(([v, l], i) => {
+    const x = 24 + cw * i + cw / 2;
+    return `<text x="${x}" y="${gy + s.h + 52}" font-size="22" font-weight="700" fill="${i === 0 ? t.accent : t.fg}" text-anchor="middle">${v}</text>` +
+      `<text x="${x}" y="${gy + s.h + 74}" font-size="12" fill="${t.muted}" text-anchor="middle">${l}</text>` +
+      (i ? `<line x1="${24 + cw * i}" y1="${gy + s.h + 30}" x2="${24 + cw * i}" y2="${gy + s.h + 80}" stroke="${t.border}"/>` : "");
   }).join("");
-  return svg(w, h, `<rect x=".5" y=".5" width="${w - 1}" height="${h - 1}" rx="10" fill="${t.card}" stroke="${t.border}"/>${body}`,
-    `@keyframes up{from{opacity:0;transform:translateY(8px)}}`);
+  const body = card(t, W, h) +
+    `<text x="24" y="32" font-size="14" font-weight="600" fill="${t.fg}">Contribution activity</text>` +
+    `<g transform="translate(${gx} ${gy})">${s.body}</g>` +
+    `<line x1="24" y1="${gy + s.h + 12}" x2="${W - 24}" y2="${gy + s.h + 12}" stroke="${t.border}"/>` + statBody;
+  return svg(W, h, body, s.css, ` role="img" aria-label="Contribution graph with a snake"`);
+}
+
+function sectionLabel(label, th) {
+  const t = THEMES[th], h = 44, tw = textW(label, 15) + 14;
+  return svg(W, h,
+    `<rect x="0" y="17" width="4" height="16" rx="2" fill="${t.accent}"/>` +
+    `<text x="14" y="30" font-size="15" font-weight="600" fill="${t.fg}">${esc(label)}</text>` +
+    `<line x1="${tw + 14}" y1="25" x2="${W}" y2="25" stroke="${t.border}"/>`);
 }
 
 function wrap(s, max) {
@@ -179,37 +197,46 @@ function wrap(s, max) {
   return lines;
 }
 
+// One of three cards that sit side by side, each linked to its project.
 function projectCard(p, th) {
-  const t = THEMES[th], w = 840, h = 118;
-  const dates = p.dates.map((d) => new Date(d).getTime()).sort((a, b) => a - b);
-  const N = 26, lo = dates[0], hi = Math.max(NOW, dates.at(-1) + 1);
-  const buckets = Array(N).fill(0);
-  dates.forEach((d) => buckets[Math.min(N - 1, Math.floor(((d - lo) / (hi - lo)) * N))]++);
-  const bmax = Math.max(...buckets);
-  const gx = w - 24 - N * 12 + 2;
-  const grid = buckets.map((b, i) => {
-    const f = b ? [t.levels[0], t.levels[1], t.levels[2], t.levels[3]][Math.min(3, Math.floor((b / bmax) * 4))] : t.empty;
-    return `<rect x="${gx + i * 12}" y="70" width="10" height="10" rx="2" fill="${f}" style="animation:pop .4s ease-out ${(0.3 + i * 0.03).toFixed(2)}s both"/>`;
-  }).join("");
-  const since = new Date(lo).toLocaleString("en-US", { month: "short", year: "numeric", timeZone: "UTC" });
-  const desc = wrap(p.desc, 70).slice(0, 2).map((l, i) => `<text x="24" y="${62 + i * 18}" font-size="13" fill="${t.muted}">${esc(l)}</text>`).join("");
-  const body =
-    `<rect x=".5" y=".5" width="${w - 1}" height="${h - 1}" rx="10" fill="${t.card}" stroke="${t.border}"/>` +
-    `<rect x="0" y="16" width="3" height="${h - 32}" rx="1.5" fill="${t.accent}"/>` +
-    `<text x="24" y="36" font-size="18" font-weight="700" fill="${t.fg}">${esc(p.title)}</text>` +
-    `<text x="${w - 24}" y="36" font-size="12" fill="${t.muted}" text-anchor="end"><tspan fill="${t.accent}">●</tspan> ${p.language ?? "Dart"}   ★ ${p.stars}${p.tag ? `   ${p.tag}` : ""}</text>` +
-    desc + grid +
-    `<text x="${w - 24}" y="98" font-size="10" fill="${t.muted}" text-anchor="end">${p.dates.length} commits since ${since}</text>`;
-  return svg(w, h, body, `@keyframes pop{from{opacity:0;transform:scale(.3)}}rect{transform-box:fill-box;transform-origin:center}`);
+  const t = THEMES[th], w = 284, h = 156;
+  const desc = wrap(p.desc, 38).slice(0, 3).map((l, i) => `<text x="22" y="${70 + i * 18}" font-size="12.5" fill="${t.muted}">${esc(l)}</text>`).join("");
+  const tw = p.tag ? textW(p.tag, 10.5) + 16 : 0;
+  const tag = p.tag ? `<rect x="${w - 22 - tw}" y="118" width="${tw}" height="20" rx="10" fill="none" stroke="${t.accent}"/>` +
+    `<text x="${w - 22 - tw / 2}" y="132" font-size="10.5" fill="${t.accent}" text-anchor="middle">${p.tag}</text>` : "";
+  const body = card(t, w, h) + tag +
+    `<text x="22" y="36" font-size="16" font-weight="700" fill="${t.fg}">${esc(p.title)}</text>` + desc +
+    `<text x="22" y="132" font-size="11" fill="${t.muted}"><tspan fill="${t.accent}">●</tspan> ${p.language} · ★ ${p.stars} · ${p.commits} commits</text>`;
+  return svg(w, h, body);
 }
 
-function button(label, th, i) {
-  const t = THEMES[th], w = 22 + label.length * 7.6, h = 34;
-  return svg(Math.round(w), h,
-    `<rect x=".5" y=".5" width="${Math.round(w) - 1}" height="${h - 1}" rx="17" fill="${t.card}" stroke="${t.border}"/>` +
-    `<rect x=".5" y=".5" width="${Math.round(w) - 1}" height="${h - 1}" rx="17" fill="none" stroke="${t.accent}" stroke-dasharray="${Math.round(w * 2)}" style="animation:draw 1.2s ease-out ${(i * 0.2).toFixed(1)}s both"/>` +
-    `<text x="${Math.round(w) / 2}" y="22" font-size="13" font-weight="600" fill="${t.fg}" text-anchor="middle">${label}</text>`,
-    `@keyframes draw{from{stroke-dashoffset:${Math.round(w * 2)}}to{stroke-dashoffset:0}}`);
+// An open-source repo I contribute to, with one dot per pull request.
+function contribCard(c, th) {
+  const t = THEMES[th], w = 434, h = 104;
+  const merged = c.prs.filter((p) => p.merged).length, open = c.prs.length - merged;
+  const dots = c.prs.map((p, i) => {
+    const x = w - 22 - (c.prs.length - 1 - i) * 18, y = 70;
+    return p.merged ? `<circle cx="${x}" cy="${y}" r="6" fill="${t.accent}"/>`
+      : `<circle cx="${x}" cy="${y}" r="5.3" fill="none" stroke="${t.accent}" stroke-width="1.4"/>`;
+  }).join("");
+  const parts = [merged && `${merged} merged`, open && `${open} in review`].filter(Boolean).join(" · ");
+  const body = card(t, w, h) +
+    `<text x="22" y="38" font-size="15" font-weight="700" fill="${t.fg}">${esc(c.name)}</text>` +
+    `<text x="22" y="58" font-size="12" fill="${t.muted}">${esc(c.repo)}</text>` +
+    `<text x="22" y="82" font-size="12" fill="${t.muted}">${c.prs.length} pull requests · ${parts}</text>` + dots;
+  return svg(w, h, body);
+}
+
+const ICONS = {
+  Portfolio: (c) => `<circle cx="0" cy="0" r="6.5" fill="none" stroke="${c}" stroke-width="1.4"/><ellipse rx="2.8" ry="6.5" fill="none" stroke="${c}" stroke-width="1.2"/><line x1="-6.5" y1="0" x2="6.5" y2="0" stroke="${c}" stroke-width="1.2"/>`,
+  LinkedIn: (c) => `<rect x="-6.5" y="-6.5" width="13" height="13" rx="3" fill="none" stroke="${c}" stroke-width="1.4"/><text x="0" y="3.6" font-size="9" font-weight="700" fill="${c}" text-anchor="middle">in</text>`,
+  Email: (c) => `<rect x="-7" y="-5" width="14" height="10" rx="2" fill="none" stroke="${c}" stroke-width="1.4"/><path d="M-6 -3.8 L0 0.8 L6 -3.8" fill="none" stroke="${c}" stroke-width="1.3" stroke-linejoin="round"/>`,
+};
+function button(label, th) {
+  const t = THEMES[th], w = 136, h = 40;
+  return svg(w, h, card(t, w, h).replace('rx="12"', 'rx="20"') +
+    `<g transform="translate(30 20)">${ICONS[label](t.accent)}</g>` +
+    `<text x="${46}" y="25" font-size="13" font-weight="600" fill="${t.fg}">${label}</text>`);
 }
 
 async function gh(path, body) {
@@ -230,24 +257,34 @@ async function calendar() {
   return json.data.user.contributionsCollection.contributionCalendar;
 }
 
-async function commitDates(repo) {
-  const dates = [];
-  for (let page = 1; ; page++) {
-    const { json, link } = await gh(`/repos/${LOGIN}/${repo}/commits?per_page=100&page=${page}`);
-    dates.push(...json.map((c) => c.commit.author.date));
-    if (!link.includes('rel="next"')) return dates;
-  }
+// One commit per page, so the last page number in the Link header is the count.
+async function commitCount(repo) {
+  const { json, link } = await gh(`/repos/${LOGIN}/${repo}/commits?per_page=1`);
+  const last = link.match(/[?&]page=(\d+)>; rel="last"/);
+  return last ? Number(last[1]) : json.length;
+}
+
+async function pullRequests(repo) {
+  const q = encodeURIComponent(`is:pr author:${LOGIN} repo:${repo}`);
+  const { json } = await gh(`/search/issues?q=${q}&per_page=100&sort=created&order=asc`);
+  return json.items.filter((i) => i.state === "closed" ? i.pull_request.merged_at : true)
+    .map((i) => ({ merged: Boolean(i.pull_request.merged_at) }));
 }
 
 const PROJECTS = [
   { repo: "pocket_chess", slug: "pocket-chess", title: "Pocket Chess",
-    desc: "A Flutter chess app with local play, AI opponents, time controls, game history and custom piece themes." },
+    desc: "A Flutter chess app with local play, AI opponents, time controls, game history and piece themes." },
   { repo: "dot_curved_bottom_nav", slug: "dot-curved-bottom-nav", title: "dot_curved_bottom_nav", tag: "pub.dev",
-    desc: "An animated bottom navigation bar for Flutter, with custom colours, animation speed and more." },
+    desc: "An animated bottom navigation bar for Flutter, with custom colours and animation speed." },
   { repo: "muzammil_hussain", slug: "portfolio", title: "Portfolio",
-    desc: "My personal site, built in Flutter, with animation on every page and a custom pre-loader while Flutter loads." },
+    desc: "My personal site, built in Flutter, with animation on every page and a custom pre-loader." },
+];
+const CONTRIBUTIONS = [
+  { slug: "flutter", name: "Flutter", repo: "flutter/flutter" },
+  { slug: "t3code", name: "T3 Code", repo: "pingdotgg/t3code" },
 ];
 const BUTTONS = ["Portfolio", "LinkedIn", "Email"];
+const SECTIONS = [["built", "Things I've built"], ["open-source", "Open source"], ["find-me", "Find me"]];
 
 const cal = await calendar();
 const { json: repos } = await gh(`/users/${LOGIN}/repos?per_page=100&type=owner`);
@@ -255,20 +292,18 @@ const own = repos.filter((r) => !r.fork);
 const stars = own.reduce((n, r) => n + r.stargazers_count, 0);
 for (const p of PROJECTS) {
   const r = own.find((x) => x.name === p.repo);
-  Object.assign(p, { stars: r?.stargazers_count ?? 0, language: r?.language ?? "Dart", dates: await commitDates(p.repo) });
+  Object.assign(p, { stars: r?.stargazers_count ?? 0, language: r?.language ?? "Dart", commits: await commitCount(p.repo) });
 }
+for (const c of CONTRIBUTIONS) c.prs = await pullRequests(c.repo);
 
 mkdirSync(OUT, { recursive: true });
 const weeks = weeksFromCal(cal);
 for (const th of Object.keys(THEMES)) {
   writeFileSync(`${OUT}/title-${th}.svg`, banner(th));
-  const s = snake(weeks, cal.totalContributions, th);
-  writeFileSync(`${OUT}/snake-${th}.svg`, s.svg);
-  writeFileSync(`${OUT}/stats-${th}.svg`, statsStrip([
-    [fmt(cal.totalContributions), "contributions this year"], [`${s.best} days`, "longest streak"],
-    [fmt(stars), "stars on my repos"],
-  ], th));
+  writeFileSync(`${OUT}/activity-${th}.svg`, activityPanel(weeks, cal.totalContributions, stars, th));
+  SECTIONS.forEach(([slug, label]) => writeFileSync(`${OUT}/section-${slug}-${th}.svg`, sectionLabel(label, th)));
   PROJECTS.forEach((p) => writeFileSync(`${OUT}/project-${p.slug}-${th}.svg`, projectCard(p, th)));
-  BUTTONS.forEach((b, i) => writeFileSync(`${OUT}/button-${b.toLowerCase().replace(/[^a-z]+/g, "-")}-${th}.svg`, button(b, th, i)));
+  CONTRIBUTIONS.forEach((c) => writeFileSync(`${OUT}/contrib-${c.slug}-${th}.svg`, contribCard(c, th)));
+  BUTTONS.forEach((b) => writeFileSync(`${OUT}/button-${b.toLowerCase()}-${th}.svg`, button(b, th)));
 }
 console.log(`wrote ${OUT}: ${cal.totalContributions} contributions, ${stars} stars`);
