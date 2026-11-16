@@ -1,7 +1,7 @@
 // Draws every image in README.md from live GitHub data, in dark and light:
 //   title-*     the name in contribution-graph cells
 //   snake-*     the last year of contributions, eaten by a growing snake
-//   stats-*     contributions, longest streak, stars, pub.dev packages
+//   stats-*     contributions, longest streak, stars
 //   project-*   one card per project, with its commit history as a cell strip
 //   button-*    the link buttons
 //
@@ -11,7 +11,6 @@ import { writeFileSync, mkdirSync } from "node:fs";
 const LOGIN = "Muzammil-Bit";
 const NAME = "Muzammil Hussain";
 const OUT = process.argv[2] ?? "dist";
-const PUB_PACKAGES = 1;
 const NOW = Date.now();
 
 const THEMES = {
@@ -267,7 +266,7 @@ for (const th of Object.keys(THEMES)) {
   writeFileSync(`${OUT}/snake-${th}.svg`, s.svg);
   writeFileSync(`${OUT}/stats-${th}.svg`, statsStrip([
     [fmt(cal.totalContributions), "contributions this year"], [`${s.best} days`, "longest streak"],
-    [fmt(stars), "stars on my repos"], [String(PUB_PACKAGES), PUB_PACKAGES === 1 ? "package on pub.dev" : "packages on pub.dev"],
+    [fmt(stars), "stars on my repos"],
   ], th));
   PROJECTS.forEach((p) => writeFileSync(`${OUT}/project-${p.slug}-${th}.svg`, projectCard(p, th)));
   BUTTONS.forEach((b, i) => writeFileSync(`${OUT}/button-${b.toLowerCase().replace(/[^a-z]+/g, "-")}-${th}.svg`, button(b, th, i)));

@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/stats-dark.svg"><img alt="Contributions this year, longest streak, stars on my repos and packages on pub.dev" src="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/stats-light.svg"></picture>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/stats-dark.svg"><img alt="Contributions this year, longest streak and stars on my repos" src="https://raw.githubusercontent.com/Muzammil-Bit/Muzammil-Bit/output/stats-light.svg"></picture>
 </p>
 
 ## Things I've built
