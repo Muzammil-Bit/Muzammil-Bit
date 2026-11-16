@@ -70,7 +70,7 @@ function weeksFromCal(cal) {
 }
 
 function snake(weeks, total, th) {
-  const t = THEMES[th], P = 14, S = 11, L = 34, T = 24, TICK = 0.06, PAUSE = 7;
+  const t = THEMES[th], P = 14, S = 11, L = 34, T = 24, TICK = 0.12, PAUSE = 7;
   const x = (c) => L + c * P, y = (r) => T + r * P;
   const all = weeks.flat();
   const max = Math.max(...all.map((d) => d.count));
@@ -82,7 +82,9 @@ function snake(weeks, total, th) {
   const path = [];
   for (let k = 5; k >= 1; k--) path.push([-k, 0]);
   weeks.forEach((_, c) => { for (let k = 0; k < 7; k++) path.push([c, c % 2 ? 6 - k : k]); });
-  const start = 3, finalLen = start + activeDays;
+  // Grows one segment every few active days, up to MAX_LEN, so it stays a snake and not a blob.
+  const start = 4, MAX_LEN = 22, per = Math.max(1, Math.ceil(activeDays / (MAX_LEN - start)));
+  const finalLen = Math.min(MAX_LEN, start + Math.floor(activeDays / per));
   const [lc, lr] = path.at(-1);
   for (let k = 1; k <= finalLen + 2; k++) path.push([lc + k, lr]);
 
@@ -128,12 +130,13 @@ function snake(weeks, total, th) {
   for (let i = finalLen - 1; i >= 1; i--) {
     const anim = [`mv ${dur}s linear ${(i * TICK).toFixed(3)}s infinite backwards`];
     if (i >= start) {
-      const g = eats[i - start].j * TICK;
+      const g = eats[(i - start + 1) * per - 1].j * TICK;
       css.push(`@keyframes g${i}{0%,${pc(g)}{opacity:0}${pc(g + 0.01)},100%{opacity:1}}`);
       anim.push(`g${i} ${dur}s linear infinite`);
     }
     const r = 5.4 - (i / finalLen) * 1.8;
-    out.push(`<g style="animation:${anim.join(",")}${i >= start ? ";opacity:0" : ""}"><circle r="${r.toFixed(2)}" fill="${lerp(t.accent, t.deep, i / finalLen)}"/></g>`);
+    const fade = 1 - (i / finalLen) ** 1.4 * 0.9; // the tail fades out
+    out.push(`<g style="animation:${anim.join(",")}${i >= start ? ";opacity:0" : ""}"><circle r="${r.toFixed(2)}" fill="${lerp(t.accent, t.deep, i / finalLen)}" opacity="${fade.toFixed(2)}"/></g>`);
   }
   out.push(`<g style="animation:mv ${dur}s linear infinite backwards"><path d="M-7 -6 H2 Q8 -6 8 0 Q8 6 2 6 H-7 Z" fill="${t.accent}"/><circle cx="3" cy="-2.8" r="1.7" fill="${t.eye}"/><circle cx="3" cy="2.8" r="1.7" fill="${t.eye}"/></g>`);
 
@@ -141,7 +144,7 @@ function snake(weeks, total, th) {
   css.push(`@keyframes res{0%,${pc(run + 0.2)}{opacity:0}${pc(run + 0.6)},${pc(dur - 0.8)}{opacity:1}${pc(dur - 0.4)},100%{opacity:0}}`);
   out.push(`<g style="animation:res ${dur}s linear infinite;opacity:0"><rect x="${L - 2}" y="${T - 2}" width="${weeks.length * P + 2}" height="${7 * P + 2}" fill="${t.bg}" opacity=".92"/>` +
     `<text x="${mx}" y="${my - 8}" fill="${t.fg}" font-size="22" font-weight="700" text-anchor="middle">Snake ate ${fmt(total)} contributions</text>` +
-    `<text x="${mx}" y="${my + 14}" fill="${t.muted}" font-size="12" text-anchor="middle">${activeDays} active days · ${best}-day streak · final length ${finalLen}</text>` +
+    `<text x="${mx}" y="${my + 14}" fill="${t.muted}" font-size="12" text-anchor="middle">${activeDays} active days · ${best}-day streak · snake length ${finalLen}</text>` +
     `<text x="${mx}" y="${my + 36}" fill="${t.accent}" font-size="12" font-weight="600" text-anchor="middle">Round two starting…</text></g>`);
 
   return { svg: svg(L + weeks.length * P + 12, T + 7 * P + 30, out.join(""), css.join("")), activeDays, best };
